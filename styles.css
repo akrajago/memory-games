@@ -1,6 +1,15 @@
+a {
+    color: black;
+}
+
 .game {
+    background-color: lemonchiffon;
     border: solid slateblue;
     padding: 1em;
     width: 150px;
     text-align: center;
+}
+
+.game:hover {
+    background-color: lightsalmon;
 }
