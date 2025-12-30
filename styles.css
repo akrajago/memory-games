@@ -1,6 +1,14 @@
+/* global */
+
 a {
     color: black;
 }
+
+button:hover {
+    cursor: pointer;
+}
+
+/* index.html */
 
 .game {
     background-color: lemonchiffon;
@@ -12,4 +20,12 @@ a {
 
 .game:hover {
     background-color: lightsalmon;
+}
+
+/* light_seq.html */
+.circle {
+    border-radius: 50%;
+    height: 150px;
+    width: 150px;
+    margin: 1em;
 }
