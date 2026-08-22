@@ -29,3 +29,11 @@ button:hover {
     width: 150px;
     margin: 1em;
 }
+
+.modal-wrapper {
+    display: none;
+}
+
+.glow {
+    background-color: salmon;
+}
