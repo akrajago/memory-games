@@ -1,7 +1,8 @@
 const startButton = document.getElementById("start-button");
+const returnButton = document.getElementById("return-button");
 const lightSequence = document.getElementById("sequence");
+const scoreModal = document.getElementById("score-modal");
 const circles = document.querySelectorAll(".circle");
-const modal = document.querySelector(".modal-wrapper");
 
 const numCircles = 4;
 let currentRound = 0;
@@ -17,6 +18,10 @@ startButton.addEventListener("click", function() {
     playRound();
 });
 
+returnButton.addEventListener("click", function() {
+    scoreModal.close();
+})
+
 function playRound() {
     userSequence = [];
     currentRound += 1;
@@ -26,7 +31,6 @@ function playRound() {
     gameSequence.push(randChoice);
 
     let delay = 0;
-    // TODO: change this to "for i in gameSequence"
     for (const i of gameSequence) {
         setTimeout(() => {
             circles[i].classList.add("glow");
@@ -56,12 +60,12 @@ lightSequence.addEventListener("click", function(e) {
         // End game if user selection is incorrect
         if (userSequence[currentIndex] != circles[gameSequence[currentIndex]]) {
             lockSequence = true;
-            console.log("game over");
-            modal.style.display = "block";
+            e.target.blur();
+            scoreModal.showModal();
             return;
         }
 
-        // Advance to next round or increment index
+        // Advance to next round or keep waiting for user
         if (userSequence.length == currentRound) {
             lockSequence = true;
             setTimeout(() => {
