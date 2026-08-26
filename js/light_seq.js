@@ -1,7 +1,9 @@
 const startButton = document.getElementById("start-button");
 const returnButton = document.getElementById("return-button");
 const lightSequence = document.getElementById("sequence");
+const circlesClicked = document.getElementById("circles-clicked");
 const scoreModal = document.getElementById("score-modal");
+const score = document.getElementById("score");
 const circles = document.querySelectorAll(".circle");
 
 const numCircles = 4;
@@ -20,13 +22,19 @@ startButton.addEventListener("click", function() {
 
 returnButton.addEventListener("click", function() {
     scoreModal.close();
-})
+});
+
+function displayModal() {
+    score.textContent = `Score: ${currentRound - 1}`;
+    scoreModal.showModal();
+}
 
 function playRound() {
     userSequence = [];
     currentRound += 1;
+    circlesClicked.textContent = "Circles clicked: 0";
 
-    // Add a circle to the light sequence
+    // Add (the index of) a circle to the light sequence
     randChoice = Math.floor(numCircles * Math.random());
     gameSequence.push(randChoice);
 
@@ -61,11 +69,14 @@ lightSequence.addEventListener("click", function(e) {
         if (userSequence[currentIndex] != circles[gameSequence[currentIndex]]) {
             lockSequence = true;
             e.target.blur();
-            scoreModal.showModal();
+            circlesClicked.textContent = "";
+            displayModal();
             return;
         }
 
-        // Advance to next round or keep waiting for user
+        circlesClicked.textContent = `Circles clicked: ${currentIndex + 1}`;
+
+        // Advance to next round or wait for next user selection
         if (userSequence.length == currentRound) {
             lockSequence = true;
             setTimeout(() => {

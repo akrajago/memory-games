@@ -25,6 +25,7 @@ button:hover {
 /* light_seq.html */
 .circle {
     border-radius: 50%;
+    border-style: solid;
     height: 150px;
     width: 150px;
     margin: 1em;
