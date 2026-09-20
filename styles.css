@@ -1,11 +1,65 @@
 /* global */
 
+body {
+    background-color: white;
+    transition: background-color 0.5s ease-in-out;
+    font-family: system-ui;
+}
+
 a {
     color: black;
 }
 
 button:hover {
     cursor: pointer;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.rule-button {
+    border-radius: 50%;
+    border-width: 1px;
+    border-style: solid;
+}
+
+.start-button {
+    display: block;
+    border-radius: 10%;
+    border-style: solid;
+    font-size: 24px;
+    padding: 10px 50px;
+    margin: 0 auto;
+}
+
+.rule-modal:open {
+    width: 400px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: auto;
+}
+
+.score-modal:open {
+    width: 100px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: auto;
+}
+
+.hidden {
+    display: none;
 }
 
 /* index.html */
@@ -23,6 +77,10 @@ button:hover {
 }
 
 /* light_seq.html */
+body.active-seq {
+    background-color:lightgray;
+}
+
 .circle {
     border-radius: 50%;
     border-style: solid;
@@ -33,4 +91,5 @@ button:hover {
 
 .glow {
     background-color: salmon;
+    box-shadow: 0 0 20px 10px salmon;
 }

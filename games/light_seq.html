@@ -7,19 +7,34 @@
     <link rel="stylesheet" href="../styles.css"/>
 </head>
 <body>
-    <h1>hello world</h1>
+    <div class="title">
+        <h1>Light Sequence</h1>
+        <button class="rule-button">?</button>
+    </div>
+
+    <dialog class="rule-modal" closedby="any">
+        <p>
+            Click the circles in the order they are presented.
+            Each round adds one extra circle to the sequence!
+        </p>
+        <i>
+            (Press esc or click outside the box to close)
+        </i>
+    </dialog>
+
     <h2 id="circles-clicked"><!-- Display circles clicked here--></h2>
     <div id="sequence">
-        <button id="circle-1" class="circle"></button>
-        <button id="circle-2" class="circle"></button>
-        <button id="circle-3" class="circle"></button>
-        <button id="circle-4" class="circle"></button>
+        <button class="circle" data-index="0"></button>
+        <button class="circle" data-index="1"></button>
+        <button class="circle" data-index="2"></button>
+        <button class="circle" data-index="3"></button>
     </div>
-    <button id="start-button">Start</button>
-    <dialog id="score-modal">
+    <button class="start-button">Start</button>
+
+    <dialog class="score-modal">
         <p>Game over!</p>
-        <p id="score"><!-- Display score here --></p>
-        <button id="return-button">Return</button>
+        <p class="score"><!-- Display score here --></p>
+        <button class="return-button">Return</button>
     </dialog>
     <script src="../js/light_seq.js"></script>
 </body>

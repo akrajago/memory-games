@@ -1,9 +1,11 @@
-const startButton = document.getElementById("start-button");
-const returnButton = document.getElementById("return-button");
 const lightSequence = document.getElementById("sequence");
 const circlesClicked = document.getElementById("circles-clicked");
-const scoreModal = document.getElementById("score-modal");
-const score = document.getElementById("score");
+const startButton = document.querySelector(".start-button");
+const returnButton = document.querySelector(".return-button");
+const ruleButton = document.querySelector(".rule-button");
+const scoreModal = document.querySelector(".score-modal");
+const ruleModal = document.querySelector(".rule-modal");
+const score = document.querySelector(".score");
 const circles = document.querySelectorAll(".circle");
 
 const numCircles = 4;
@@ -14,6 +16,7 @@ let userSequence = [];
 let lockSequence = true;
 
 startButton.addEventListener("click", function() {
+    startButton.classList.add("hidden");
     currentRound = 0;
     gameSequence = [];
     userSequence = [];
@@ -24,21 +27,30 @@ returnButton.addEventListener("click", function() {
     scoreModal.close();
 });
 
+ruleButton.addEventListener("click", function() {
+    ruleButton.blur();
+    ruleModal.showModal();
+})
+
 function displayModal() {
     score.textContent = `Score: ${currentRound - 1}`;
     scoreModal.showModal();
 }
 
 function playRound() {
+    lockSequence = true;
     userSequence = [];
     currentRound += 1;
+    document.body.classList.add("active-seq");
     circlesClicked.textContent = "Circles clicked: 0";
 
     // Add (the index of) a circle to the light sequence
-    randChoice = Math.floor(numCircles * Math.random());
+    let randChoice = Math.floor(numCircles * Math.random());
     gameSequence.push(randChoice);
 
-    let delay = 0;
+    let delay = 1000;
+    let totalDelay = 1000 * currentRound + delay;
+
     for (const i of gameSequence) {
         setTimeout(() => {
             circles[i].classList.add("glow");
@@ -53,8 +65,9 @@ function playRound() {
     // Allow user selection after sequence is played
     setTimeout(() => {
         lockSequence = false;
+        document.body.classList.remove("active-seq");
         currentIndex = 0;
-    }, 1000 * currentRound);
+    }, totalDelay);
 }
 
 lightSequence.addEventListener("click", function(e) {
@@ -70,14 +83,15 @@ lightSequence.addEventListener("click", function(e) {
             lockSequence = true;
             e.target.blur();
             circlesClicked.textContent = "";
+            startButton.classList.remove("hidden");
             displayModal();
             return;
         }
 
         circlesClicked.textContent = `Circles clicked: ${currentIndex + 1}`;
 
-        // Advance to next round or wait for next user selection
-        if (userSequence.length == currentRound) {
+        // Player can get the correct sequence and rapidly press circles after
+        if (userSequence.length >= currentRound) {
             lockSequence = true;
             setTimeout(() => {
                 playRound();
